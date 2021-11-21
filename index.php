@@ -35,7 +35,9 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 $current_record = $records[$data_index];
 
-
+function checkDBTest() {
+    echo 'I just ran a php function';
+  }
 
 ?>
 
