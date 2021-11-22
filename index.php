@@ -21,6 +21,7 @@ $result = mysqli_query($mysqli, $query);
 $records = array ();
 $data_index = 0;
 
+
 $count = 0;
 while ($row = mysqli_fetch_assoc($result)) {
 
@@ -34,10 +35,22 @@ while ($row = mysqli_fetch_assoc($result)) {
     $count++;
 }
 $current_record = $records[$data_index];
+$anzahl = count($records);
 
 function checkDBTest() {
     echo 'I just ran a php function';
   }
+
+// Next / Before Datensatz Button Event
+if (isset($_POST['btn_first'])) {
+  $data_index=0;
+} else if (isset($_POST['btn_prev'])) {
+  $data_index--;
+} else if (isset($_POST['btn_last'])) {
+  $data_index=$anzahl-1;
+} else if (isset($_POST['btn_next'])) {
+  $data_index++;
+}
 
 ?>
 
@@ -51,6 +64,7 @@ function checkDBTest() {
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </head>
     <body>
+    <?php echo $data_index ?>
         <div class="container">
             <div class="row">
               <div class="col">
@@ -129,20 +143,21 @@ function checkDBTest() {
                             </div>
                             <div class="main_verw_div5">
                                 <div class="data_slider">
+                                <form method="post">
                                     <div class="data_slider_parent">
                                     <div class="data_slider_div1"style="padding: 30px;">
-                                        <button class="btn btn-dark" style="float:left;">
+                                        <input type="submit" class="btn btn-dark" style="float:left;">
                                             
-                                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+                                              <svg xmlns="http://www.w3.org/2000/svg" name="btn_first" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
                                                 <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5zM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5z"/>
                                               </svg>
-                                        </button>
-                                        <button class="btn btn-dark" style="float:left; margin-left: 10px;">
+                                        </input>
+                                        <input type="submit" class="btn btn-dark" name="btn_prev" style="float:left; margin-left: 10px;">
                                             
                                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
                                                 <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
                                               </svg>
-                                        </button>
+                                        </input>
                                     </div>
                                     <div class="data_slider_div2"style="padding: 30px; text-align:center;">
                                     <!-- Hier kommen die Records hin -->
@@ -157,18 +172,19 @@ function checkDBTest() {
                                     ?>
                                     </div>
                                     <div class="data_slider_div3" style="padding: 30px;">
-                                        <button class="btn btn-dark" style="float:right;">
+                                        <input type="submit" class="btn btn-dark" name="btn_next" style="float:right;">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
                                                 <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z"/>
                                               </svg>
-                                        </button>
-                                        <button class="btn btn-dark"style="float:right; margin-right: 10px;">
+                                        </input>
+                                        <input type="submit" class="btn btn-dark" name="btn_last" style="float:right; margin-right: 10px;">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
                                                 <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
                                               </svg>
-                                        </button>
+                                        </input>
                                     </div>
                                     </div>
+                                    </form>
                                 </div>
                             </div>
                     </div>
