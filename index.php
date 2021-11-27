@@ -53,7 +53,6 @@ function checkDBTest() {
 // Next / Before Datensatz Button Event
 $current_record = $records[$data_index];
 $index = $data_index;
-echo $data_index;
 ?>
 
 
@@ -64,6 +63,13 @@ echo $data_index;
         <link rel="stylesheet" href="./style/style.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        	<!-- bootstrap -->
+          <script>
+$(document).ready(function(){
+    $("#myTab0 a:last").tab("show"); // show last tab
+});
+</script>
     </head>
     <body>
         <div class="container">
@@ -103,23 +109,58 @@ echo $data_index;
                                 <h4 class="main_app_header">PC Verwaltung Ver.4</h4>    
                             </div>
                             <div class="main_verw_div3">
-                                <h5>Dateieingabe</h5>
+                            <h5>Dateieingabe</h5>
+        <ul class="nav nav-tabs" id="myTab">
+        <li class="nav-item">
+            <a href="#data_aendern" class="nav-link active" data-bs-toggle="tab">Datensatz ändern</a>
+        </li>
+        <li class="nav-item">
+            <a href="#data_neu" class="nav-link" data-bs-toggle="tab">Datensatz erstellen</a>
+        </li>
+    </ul>
+    <br>
+<div class="tab-content" id="Tab_datensätze">
+      <div
+        class="tab-pane fade show active"
+        id="data_aendern"
+        role="tabpanel"
+        aria-labelledby="data_aendern_tab"
+      >
                                 <!-- Input Form -->
                                 <form action="./classes/updated.php" method="post">
                                 <div class="form_parent">
                                     <input name="id" value="<?php echo $current_record[0]; ?>" hidden>
                                     <div class="form_div1"><label for="prozesstakt">Prozessortakt in GHz</label></div>
-                                    <div class="form_div2"><input id="prozesstakt" name="hdd" required></div>
+                                    <div class="form_div2"><input id="prozesstakt" value="<?php echo $current_record[1]; ?>" name="hdd" value="" required></div>
                                     <div class="form_div3"><label for="arbeitsspeicher">Arbeitsspeicher in GB</label></div>
-                                    <div class="form_div4"><input id="arbeitsspeicher" name="takt" required></div>
+                                    <div class="form_div4"><input id="arbeitsspeicher" value="<?php echo $current_record[2]; ?>" name="takt" required></div>
                                     <div class="form_div5"><label for="festplattkapa">Festplattenkapazität in GB</label></div>
-                                    <div class="form_div6"><input id="festplattkapa" name="ram" required></div>
+                                    <div class="form_div6"><input id="festplattkapa" name="ram" value="<?php echo $current_record[3]; ?>" required></div>
                                     <div class="form_div7"><button type="submit"  id="btn_datensatz_ändern" class="btn btn-dark">Datensatz ändern</button></div>
                                     <div class="form_div8"><button type="reset" id="btn_datensatz_löschen" class="btn btn-dark">Löschen</button></div>
                                     </div>
                                 </form>
-
-
+      </div>
+      <div 
+          class="tab-pane fade"
+          id="data_neu"
+          role="tabpanel"
+          aria-labelledby="data_neu_tab">
+                                <!-- Input Form -->
+                                <form action="./classes/create.php" method="post">
+                                <div class="form_parent">
+                                    <div class="form_div1"><label for="prozesstakt">Prozessortakt in GHz</label></div>
+                                    <div class="form_div2"><input id="prozesstakt" name="hdd" value="" required></div>
+                                    <div class="form_div3"><label for="arbeitsspeicher">Arbeitsspeicher in GB</label></div>
+                                    <div class="form_div4"><input id="arbeitsspeicher"  name="takt" required></div>
+                                    <div class="form_div5"><label for="festplattkapa">Festplattenkapazität in GB</label></div>
+                                    <div class="form_div6"><input id="festplattkapa" name="ram"  required></div>
+                                    <div class="form_div7"><button type="submit"  id="btn_datensatz_ändern" class="btn btn-dark">Datensatz hinzufügen</button></div>
+                                    <div class="form_div8"><button type="reset" id="btn_datensatz_löschen" class="btn btn-dark">Löschen</button></div>
+                                    </div>
+                                </form>
+      </div>
+</div>
                             </div>
                             <div class="main_verw_div4">
                                 <h5>Dateiausgabe</h5>
@@ -211,6 +252,12 @@ echo $data_index;
               </div>
             </div>
           </div>
+
+
+        
+
+        
+
 
         <!-- Modals -->
           <div class="Modals">
