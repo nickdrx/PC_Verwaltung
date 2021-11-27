@@ -98,7 +98,7 @@ $(document).ready(function(){
                                             ?
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownhelp">
-                                          <li><a class="nav-link" onclick="method_DB_Ver_Test()">DB-Verbindung testen</a></li>
+                                          <li><a class="nav-link" data-bs-toggle="modal" data-bs-target="#checkdb">DB-Verbindung testen</a></li>
                                           <li><a class="nav-link" data-bs-toggle="modal" data-bs-target="#uebermodel">Über PC Verwaltung</a></li>
                                         </ul>
                                       </div>
@@ -259,9 +259,33 @@ $(document).ready(function(){
         
 
 
-        <!-- Modals -->
+        <!-- Modals  -->
           <div class="Modals">
 
+          <div class="modal fade" id="checkdb" tabindex="-1" aria-labelledby="checkdbLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="checkdbLabel">DB-Verbindung testen</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <?php 
+                      if ( $mysqli ){
+                        echo "<h2>Mit Datenbank verbunden!</h2>" . "<br>";
+
+                        echo "<h5>Host:</h5>" . $host . "<br>";
+                        echo "<h5>User:</h5>" . $user . "<br>";
+                        echo "<h5>Datenbank:</h5>" . $db . "<br>";
+                      }
+                      else {
+                          die('keine Verbindung möglich: ' . mysql_error());
+                      }
+                      ?>
+                    </div>
+                </div>
+                </div>
+            </div>
             
             <div class="modal fade" id="uebermodel" tabindex="-1" aria-labelledby="uebermodelLabel" aria-hidden="true">
                 <div class="modal-dialog">

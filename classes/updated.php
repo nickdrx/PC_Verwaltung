@@ -36,12 +36,7 @@ $statement->close();
 $mysqli->close();
 
 
-
-
-
-
 ?>
-
 
 <html>
 <br>
