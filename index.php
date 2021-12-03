@@ -9,6 +9,11 @@ $db = 'pcverwaltung';
 //Create Connection
 $mysqli = mysqli_connect($host, $user, $password, $db);
 
+
+if ( $host ){}
+else {
+    die('keine Verbindung möglich: ' . mysql_error());
+}
 if ( $mysqli ){}
 else {
     die('keine Verbindung möglich: ' . mysql_error());
